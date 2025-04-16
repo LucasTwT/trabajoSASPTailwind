@@ -20,28 +20,19 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 # -> Reinicia el caché del navegado
 def base_template():
     return render_template('home.html')
 
-@app.route('/pruebas')
-def pruebas():
-    return render_template("pruebaTail.html")
-
 @app.route('/huerto')
 def gestion_huerto():
-    h = HuertoVirtual(5, 5, 'Data/imgsPlants')
+    paht_jsons = 'static/json'
+    h = HuertoVirtual(5, 5, 'static/plantasImgs')
     h.plantar()
     preds = h.preds_IA()
     preds_bool = h.pred2bool(preds)
-    h.algoritmo_riego()
-    data = carga_de_datos('static/json', (h.filas*h.columnas))
+    riego = h.algoritmo_riego(paht_jsons, h.filas, h.columnas)
+    data = carga_de_datos(paht_jsons, (h.filas*h.columnas))
     estadisticas = stats(data, preds_bool, num_columnas=h.columnas, num_filas=h.filas)
     distancias = crear_grafo(preds_bool, preds, "static/imgs")
-    distancias = np.array(distancias).shape
     preds_str = h.pred2string(preds) 
-    necesidades = { # solo se especifica la humedad ya que la temperatura es un estándar
-        'Potatos': 75,
-        'Tomatos': 92,
-        'Peppers': 92
-    }
-    return render_template('huerto.html', estadisticas=estadisticas, plantas=h, distancias=distancias, preds_str=preds_str, necesidades=necesidades)
+    return render_template('huerto.html', estadisticas=estadisticas, plantas=h, distancias=distancias, preds_str=preds_str, riego=riego)
 
 def carga_de_datos(path, num): # Carga de los datos .json
     files = []

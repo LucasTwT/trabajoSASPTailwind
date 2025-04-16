@@ -39,7 +39,7 @@
 <!-- Carrusel -->
 
 <div class="w-full h-[90vh] flex flex-col items-center justify-center relative">
-    <div class="text-5xl text-white text-center mt-12 font-bold m">Nuestros servicios:</div>
+    <div class="text-5xl text-black dark:text-white text-center mt-12 font-bold m">Nuestros servicios:</div>
     <div class="container mx-auto px-6 h-full relative z-10">
       <div class="carousel relative overflow-hidden rounded-3xl shadow-2xl h-full mt-8">
         <!-- Slides -->
@@ -95,39 +95,39 @@
       </div>
     </div>
   </div>
-  <div class="text-2xl text-white text-center mt-20">
+  <div class="text-2xl text-black dark:text-white text-center mt-20">
     Todos estos servicios los podrás utilizar de una forma sencilla a través de nuestra web
 </div>
 
 <!-- IA tabla y grafica -->
-<h1 class="mt-14 text-white text-3xl font-bold text-center">Nuestra IA:</h1>
+<h1 class="mt-14 text-black dark:text-white text-3xl font-bold text-center">Nuestra IA:</h1>
 
 <div class="grid mt-10 grid-cols-2 grid-rows-1 justify-center px-6">
   <div class="flex flex-col items-center mt-16">
-    <h2 class="text-white text-xl font-semibold text-center mb-6">
+    <h2 class=" text-black dark:text-white text-xl font-semibold text-center mb-6">
       Contamos con tres IAs, cada una especializada en un tipo de planta diferente
     </h2>
     <div class="w-full overflow-x-auto">
-      <table class="min-w-full bg-white rounded-xl shadow-lg overflow-hidden">
-        <thead class="bg-gray-200 text-gray-700 uppercase text-sm font-semibold">
+      <table class="min-w-full bg-black dark:bg-white rounded-xl shadow-lg overflow-hidden">
+        <thead class="bg-gray-900 dark:bg-gray-200  text-white dark:text-gray-700 uppercase text-sm font-semibold">
           <tr>
             <th class="py-3 px-5 text-left">Modelo</th>
             <th class="py-3 px-5 text-left">Núm. enfermedades</th>
             <th class="py-3 px-5 text-left">Error</th>
           </tr>
         </thead>
-        <tbody class="text-gray-800">
-          <tr class="border-b hover:bg-gray-100 transition">
+        <tbody class=" text-white dark:text-gray-800">
+          <tr class="border-b hover:bg-gray-700  dark:hover:bg-gray-100 transition">
             <td class="py-3 px-5">Pimientos</td>
             <td class="py-3 px-5">1</td>
             <td class="py-3 px-5">0.4%</td>
           </tr>
-          <tr class="border-b hover:bg-gray-100 transition">
+          <tr class="border-b hover:bg-gray-700 dark:hover:bg-gray-100 transition">
             <td class="py-3 px-5">Patatas</td>
             <td class="py-3 px-5">2</td>
             <td class="py-3 px-5">12%</td>
           </tr>
-          <tr class="hover:bg-gray-100 transition">
+          <tr class="hover:bg-gray-700 dark:hover:bg-gray-100 transition">
             <td class="py-3 px-5">Tomates</td>
             <td class="py-3 px-5">9</td>
             <td class="py-3 px-5">11%</td>
@@ -151,14 +151,14 @@
   </h1>
 
   <div class="grid grid-cols-1 md:grid-cols-6 grid-rows-3 gap-4 max-w-6xl mx-auto mt-12">
-    <div class="col-span-1 md:col-span-3">
+    <div class="col-span-1 md:col-span-3 hover:shadow-gray-800 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
         class="w-full aspect-video object-cover rounded-lg shadow-md"
         src="{{ url_for('static', filename='imgs/dronGridHome.webp') }}"
         alt="Dron sobre campo"
       />
     </div>
-    <div class="col-span-1 md:col-span-3">
+    <div class="col-span-1 md:col-span-3 hover:shadow-gray-800 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
         class="w-full aspect-video object-cover rounded-lg shadow-md"
         src="{{ url_for('static', filename='imgs/grafo_cultivos_grid.png') }}"
@@ -166,21 +166,21 @@
       />
     </div>
 
-    <div class="col-span-1 md:col-span-2">
+    <div class="col-span-1 md:col-span-2 hover:shadow-gray-800 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
         class="w-full aspect-square object-cover rounded-lg shadow-md"
         src="{{ url_for('static', filename='imgs/perdida_pepper.png') }}"
         alt="Pérdida de pimientos"
       />
     </div>
-    <div class="col-span-1 md:col-span-2">
+    <div class="col-span-1 md:col-span-2 hover:shadow-gray-800 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
         class="w-full aspect-square object-cover rounded-lg shadow-md"
         src="{{ url_for('static', filename='imgs/perdida_tomatos.png') }}"
         alt="Pérdida de tomates"
       />
     </div>
-    <div class="col-span-1 md:col-span-2">
+    <div class="col-span-1 md:col-span-2 hover:shadow-gray-800 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
         class="w-full aspect-square object-cover rounded-lg shadow-md"
         src="{{ url_for('static', filename='imgs/perdida_potatos.png') }}"
@@ -188,14 +188,14 @@
       />
     </div>
 
-    <div class="col-span-1 md:col-span-3">
+    <div class="col-span-1 md:col-span-3 hover:shadow-gray-800 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
         class="w-full aspect-video object-cover rounded-lg shadow-md"
         src="{{ url_for('static', filename='imgs/comparativa_perdidas.png') }}"
         alt="Comparativa de pérdidas"
       />
     </div>
-    <div class="col-span-1 md:col-span-3">
+    <div class="col-span-1 md:col-span-3 hover:shadow-gray-800 hover:shadow-2xl hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
         class="w-full aspect-video object-cover rounded-lg shadow-md"
         src="{{ url_for('static', filename='imgs/riego_automatico_grid.png') }}"
@@ -212,58 +212,5 @@
   </div>
 </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const slides = document.querySelector('.slides');
-        const slideItems = document.querySelectorAll('.slide');
-        const prevBtn = document.querySelector('.carousel-prev');
-        const nextBtn = document.querySelector('.carousel-next');
-        const indicators = document.querySelectorAll('.indicator');
-        
-        let currentIndex = 0;
-        const totalSlides = slideItems.length;
-        
-        // Función para actualizar el carrusel
-        function updateCarousel() {
-            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Actualizar indicadores
-            indicators.forEach((indicator, index) => {
-                if (index === currentIndex) {
-                    indicator.classList.add('bg-white');
-                    indicator.classList.remove('bg-white/50');
-                } else {
-                    indicator.classList.remove('bg-white');
-                    indicator.classList.add('bg-white/50');
-                }
-            });
-        }
-        
-        // Event listeners para botones
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateCarousel();
-        });
-        
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        });
-        
-        // Event listeners para indicadores
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentIndex = index;
-                updateCarousel();
-            });
-        });
-        
-        // Auto avanzar (opcional)
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateCarousel();
-        }, 5000);
-    });
-
-</script>
+<script src="{{ url_for('static', filename='js/carrusel.js') }}"></script>
 {% endblock %}

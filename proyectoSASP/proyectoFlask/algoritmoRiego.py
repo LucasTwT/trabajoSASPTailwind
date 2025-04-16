@@ -1,7 +1,11 @@
 import json
 import requests
 
-url = 0 #f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}"
+api_key = "3d208747e3095b645933ba83d8156fed"
+lat = 40.119646
+lon = -3.664446
+
+url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}"
 
 respuesta = requests.get(url)
 data_clima = respuesta.json()

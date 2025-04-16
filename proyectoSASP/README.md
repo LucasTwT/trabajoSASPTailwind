@@ -8,6 +8,7 @@ Crear una simulación de un huerto con herramientas avanzadas
 - Algoritmo de riego automático
 - Rutas automáticas 
 - Ia de clasificación de enfermedades
+- Implementación final en la web (Flask)
 
 ## IA de clasificación del enfermedades:
 
@@ -66,3 +67,27 @@ Detección de las enfermedades de los tomates, pimientos y patatas
 
 ### Implementacion en el código principal:
 
+La IA se emplea en el código ``principal.py`` cargando los pesos y pasandole imágenes de las plantas luego 
+se recolectan las predicciones en matrices para su utilización en distintos códigos
+
+---
+
+## Grafos:
+
+### Finalidad:
+Obtención de las rutas más optimas donde se han detectado enfermedades para ello debe de recibir los datos de la IA
+
+---
+
+## Algoritmo de detección de riego:
+
+### Finalidad:
+Detectar cuando hay que regar, 
+para ello recibe datos meteorológicos una API y tambíen se simulan los datos recibidos por sensores de humedad y temperatura
+
+---
+
+## Implementación en la web:
+
+Todos estos codigos se implementan en la web con la estructura del archivo 
+<img src="ProyectoSASPEstructura.svg">

@@ -161,15 +161,22 @@ class HuertoVirtual:
     def obtener_datos_sensor_suelo(self):
         return {"humedad": random.randint(45, 100), "temperatura": random.randint(15, 35)}
     
-    def algoritmo_riego(self): # Exporta en formato json los datos de riego
+    def algoritmo_riego(self, path, filas, columnas): # Exporta en formato json los datos de riego
+        if len(os.listdir(path)) > 0 and len(os.listdir(path)) != (filas*columnas):
+            for dir in os.listdir(path):
+                os.remove(os.path.join(path, dir))
         cont = 0
+        riegos_requeridos = []
         for i in range(self.filas):
+            fila_riego_requerido = []
             for j in range(self.columnas):
                 cont+=1
                 datos_sensor = self.huerto[i][j]['sensor']
                 decision, razones = calcular_riego(datos_sensor['humedad'], datos_sensor['temperatura'], lluvia_1h , esta_lloviendo)
-                exportar_json(decision, razones, datos_sensor['temperatura'], datos_sensor['humedad'], 'static/json', cont)
-    
+                fila_riego_requerido.append((decision, razones))
+                exportar_json(decision, razones, datos_sensor['temperatura'], datos_sensor['humedad'], path, cont)
+            riegos_requeridos.append(fila_riego_requerido)
+        return riegos_requeridos
     
     def pred2bool(self, pred: list) -> list:
         criterio_bueno = {

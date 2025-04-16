@@ -104,8 +104,8 @@ def crear_grafo(matriz_def, matriz_detalle, ruta_guardado):
     )
 
     # Fondo oscuro
-    fig.patch.set_facecolor('#0F1B12') 
-    ax.set_facecolor('#0F1B12')  # Asegurar que el fondo del gráfico también sea oscuro
+    fig.patch.set_facecolor('#052E16') 
+    ax.set_facecolor('#052E16')  # Asegurar que el fondo del gráfico también sea oscuro
     plt.axis("off")
     
     # Calcular rutas más cortas desde Inicio
@@ -119,9 +119,8 @@ def crear_grafo(matriz_def, matriz_detalle, ruta_guardado):
         print("El nodo 'Inicio' no existe en el grafo.")
 
     # Mostrar título
-    plt.title("Grafo de cultivos (3D)", weight='bold', color="white", style='italic', fontsize=20)
     plt.tight_layout()
 
     # Guardar la imagen
-    plt.savefig(f"{ruta_guardado}/grafo_cultivos.png")
+    plt.savefig(f"{ruta_guardado}/grafo_cultivos.png", transparent=True)
     return distancia
