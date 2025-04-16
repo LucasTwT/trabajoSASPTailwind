@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Incio huerto</title>
+<link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet" />
+{% endblock %} 
+
+{% block content %} 
+
+<!-- Estadisticas flotantes -->
+<div class="overflow-hidden whitespace-nowrap mt-10">
+  <div class="inline-block animate-marquee">
+    {% for nombre, valor in estadisticas.items() %}
+      <span class="inline-block text-white bg-gray-900 mr-10 px-2 py-1 rounded-3xl text-xl">{{ nombre }}: {{ valor }}</span>
+    {% endfor %}
+  </div>
+</div>
+
+
+<!-- Huerto virtual -->
+
+<h1 class="mt-5 text-center text-white text-4xl font-bold">Gestión del huerto:</h1>
+
+<div 
+  class="grid w-full gap-0 bg-gray-400 rounded p-4 mt-7 border-2"
+  style="grid-template-columns: repeat({{ plantas.columnas }}, 1fr); 
+         grid-template-rows: repeat({{ plantas.filas }}, auto);"
+>
+  {% for i in range(plantas.filas) %}
+    {% for j in range(plantas.columnas) %}
+      <div
+        class="{% if preds_str[i][j] == 'sano' %}bg-green-400 
+                {% elif plantas[i, j]['requerimientos']['humedad'] < necesidades[plantas[i, j].tipo] %}bg-red-400 
+                {% else %}bg-amber-400{% endif %} 
+               border p-3 flex flex-col justify-center items-start text-sm text-gray-700"
+      >
+        <div><span class="font-bold">🌿 Tipo:</span> {{ plantas[i, j].tipo }}</div>
+        <div class="hidden hover:visible"><span class="text-blue-600 font-medium">💧 Humedad:</span> {{ plantas[i, j]['requerimientos']['humedad'] }}</div>
+        <div class="hidden hover:visible"><span class="text-red-600 font-medium ">🌡️ Temp:</span> {{ plantas[i, j]['requerimientos']['temperatura'] }}</div>
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>
+
+<div class="flex w-auto h-auto place-content-center items-center justify-center">
+  <div class="mt-14">
+    <img class="ps-5 w-1/2 h-auto rounded-3xl"  src="{{ url_for('static', filename='imgs/grafo_cultivos.png') }}" alt="Imágen fallida de los grafos">
+  </div>
+  <div class="pr-8 mt-14">
+    <canvas class=""  id="graficoRiego" width="600" height="400"></canvas>
+  </div>
+</div>
+
+<br>
+
+<script>
+  const filas = {{ plantas.filas }};
+  const columnas = {{ plantas.columnas }};
+  const total = filas * columnas;
+
+  const humedad = [];
+  const temperatura = [];
+  const labels = [];
+
+  async function cargarDatos() {
+    for (let i = 1; i <= total; i++) {
+      try {
+        const res = await fetch(`/static/json/dataRiego${i}.json`);
+        const json = await res.json();
+
+        humedad.push(json.parametros.humedad_suelo);
+        temperatura.push(json.parametros.temperatura);
+        labels.push(`Planta ${i}`);
+      } catch (err) {
+        console.error(`Error al cargar dataRiego${i}.json`, err);
+      }
+    }
+
+    dibujarGrafico();
+  }
+
+  function dibujarGrafico() {
+    const ctx = document.getElementById('graficoRiego').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '🌡️ Temperatura (°C)',
+            data: temperatura,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            tension: 0.3
+          },
+          {
+            label: '💧 Humedad Suelo (%)',
+            data: humedad,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  cargarDatos();
+</script>
+
+{% endblock %}

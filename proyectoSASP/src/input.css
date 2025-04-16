@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+@import "./styles/datos_flotantes_style.css";
+@import "./styles/footer_style.css";
+@import "./styles/huerto_virtual_style.css";
+@layer components {
+    .card{
+        @apply bg-red-500 w-40 h-40 grid place-content-center rounded-lg text-white font-bold border-2 border-red-600 text-4xl;
+    }
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }

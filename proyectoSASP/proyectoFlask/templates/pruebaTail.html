@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<input type="file" class="file:bg-violet-100 file:border-0 file:rounded-lg file:text-violet-700 file:font-semibold file:px-3 hover:file:bg-violet-300">
+    <link 
+    rel="stylesheet" 
+    href="{{ url_for('static', filename='css/output.css') }}"
+  >
+    <title>Document</title>
+</head>
+<body class="dark:bg-slate-900">
+    <ol class="list-decimal ml-6 marker:text-red-500 marker:font-bold">
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+    </ol>
+    
+    <p class="selection:bg-green-400 selection:text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta tempore dolorem dolor expedita ratione ipsum voluptatem culpa atque officia velit nihil quisquam, laudantium voluptate, veritatis rem. Adipisci, voluptate! Atque, qui?</p>
+    
+    <p class="first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:mr-3 first-letter:float-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi odio eaque quaerat nesciunt tempore assumenda repudiandae magni, voluptate placeat nihil provident, tenetur vel soluta fugit porro natus voluptas accusantium molestias.</p>
+    <section class="xl:flex">
+    <div class="border-2 border-black p-6 w-80 mx-auto mt-10 lg:w-96">
+        <h2 class="text-xl font-bold sm:text-2xlf lg:3xl">CodingTube</h2>
+        <p class="mt-4 md:text-2xl"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque maiores consequatur, id quidem eum, accusantium reprehenderit veritatis ratione fugiat culpa delectus vel aspernatur, nisi ipsa necessitatibus magni quas incidunt omnis!</p>
+    </div>
+    <div class="border-2 border-black p-6 w-80 mx-auto mt-10 lg:w-96">
+        <h2 class="text-xl font-bold sm:text-2xlf lg:3xl">CodingTube</h2>
+        <p class="mt-4 md:text-2xl"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque maiores consequatur, id quidem eum, accusantium reprehenderit veritatis ratione fugiat culpa delectus vel aspernatur, nisi ipsa necessitatibus magni quas incidunt omnis!</p>
+    </div>
+    <div class="border-2 border-black p-6 w-80 mx-auto mt-10 lg:w-96">
+        <h2 class="text-xl font-bold sm:text-2xlf lg:3xl">CodingTube</h2>
+        <p class="mt-4 md:text-2xl"> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque maiores consequatur, id quidem eum, accusantium reprehenderit veritatis ratione fugiat culpa delectus vel aspernatur, nisi ipsa necessitatibus magni quas incidunt omnis!</p>
+    </div>
+    </section>
+    
+    <!-- Flexbox -->
+    
+    <div class="flex place-content-between border-2 border-blue-800 h-[600px] items-start  gap-4">
+        <div class="card grow basis-1/4">1</div>
+        <div class="card self-center grow shrink-0 basis-1/4">2</div>
+        <div class="card self-end grow shrink-0 basis-1/2">3</div>
+    </div>
+
+    <!-- grid -->
+
+    <div class="grid grid-cols-4 gap-4">
+        <div class="card col-span-2">1</div>
+        <div class="card">2</div>
+        <div class="card">3</div>
+        <div class="card">4</div>
+        <div class="card row-span-3">5</div>
+        <div class="card">6</div>
+        <div class="card col-start-2 col-end-4">7</div>
+        <div class="card">8</div>
+        <div class="card">9</div>
+    </div>
+
+    <label for="darkmode">Dark mode</label>
+    <input type="checkbox" id="darkmode">
+    <script>
+        const darkModeInput = document.querySelector('#darkmode');
+
+        darkModeInput.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        })
+    </script>
+</body>
+</html>
