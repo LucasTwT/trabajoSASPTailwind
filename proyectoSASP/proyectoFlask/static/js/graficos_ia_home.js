@@ -1,3 +1,38 @@
+function isDarkMode() {
+    return document.documentElement.classList.contains('dark');
+}
+
+function actualizarTemaDelGrafico(chart) {
+    const dark = isDarkMode();
+
+    chart.options.scales.x.ticks.color = dark ? '#fff' : '#000';
+    chart.options.scales.y.ticks.color = dark ? '#fff' : '#000';
+
+    chart.options.scales.x.grid.color = dark ? '#ffffff10' : '#00000010';
+    chart.options.scales.y.grid.color = dark ? '#ffffff20' : '#00000020';
+
+    chart.options.scales.x.title.color = dark ? '#fff' : '#000';
+    chart.options.scales.y.title.color = dark ? '#fff' : '#000';
+
+    chart.options.plugins.legend.labels.color = dark ? '#fff' : '#000';
+    chart.options.plugins.title.color = dark ? '#fff' : '#000';
+    chart.options.plugins.subtitle.color = dark ? '#ccc' : '#333';
+
+    chart.options.plugins.tooltip.backgroundColor = dark ? '#000000dd' : '#ffffffdd';
+    chart.options.plugins.tooltip.titleColor = dark ? '#00BCD4' : '#00796B';
+    chart.options.plugins.tooltip.bodyColor = dark ? '#fff' : '#000';
+    chart.options.plugins.tooltip.borderColor = dark ? '#ffffff30' : '#00000030';
+
+    chart.update();
+}
+
+document.getElementById('modoToggle').addEventListener('click', () => {
+    localStorage.setItem('theme', isDarkMode() ? 'dark' : 'light');
+    setTimeout(() => {
+        actualizarTemaDelGrafico(miGrafico);
+    }, 300); // delay si hay animación de clase
+});
+
 
 const data = [
 [0.12487854808568954, 0.004765782505273819, 0.007114121224731207, 0.13026493787765503, 0.0019127886043861508, 0.0057252454571425915, 0.004931269679218531, 0.004614181350916624, 0.000619191734585911, 0.0004418059252202511],
@@ -40,7 +75,7 @@ afterDraw: (chart) => {
 }
 };
 
-new Chart(ctx, {
+const miGrafico = new Chart(ctx, {
 type: 'line',
 plugins: [glowPlugin],
 data: {

@@ -8,7 +8,7 @@
 
 <!-- Estadisticas flotantes -->
 <div class="overflow-hidden whitespace-nowrap mt-10">
-  <div class="inline-block animate-marquee">
+  <div class="inline-block animate-marquee  ">
     {% for nombre, valor in estadisticas.items() %}
       <span class="inline-block text-white bg-gray-900 mr-10 px-2 py-1 rounded-3xl text-xl">{{ nombre }}: {{ valor }}</span>
     {% endfor %}
@@ -22,7 +22,7 @@
   <kbd class="mt-5  bg-amber-500 text-black px-2 py-1 rounded text-4xl font-bold">Gestión del huerto:</kbd>
   <!-- Leyenda -->
   <div class="mt-5 text-2xl text-white">
-    <p>🟩 Saludable   🟨 Enferma   🟥 Enferma, mala humedad y mala temperatura   🟦 Humedad mala   🟪 Temperatura mala</p>
+    <p>🟩 Saludable   🟨 Enferma   ☠️ Enferma, mala humedad y mala temperatura   🟦 Humedad mala   🟥 Temperatura mala</p>
   </div>
   <div 
     class="grid w-full gap-2 rounded p-4 mt-7"
@@ -32,14 +32,36 @@
       {% for j in range(plantas.columnas) %}
         <div
           class="planta-cell cursor-pointer 
-                {% if preds_str[i][j] == 'sano' %}bg-green-400 
-                {% elif plantas[i, j]['sensor']['humedad'] < plantas[i, j]['requerimientos']['humedad'] %}bg-red-400 
-                {% else %}bg-amber-400{% endif %} 
+          {% if preds_str[i][j] == 'sano' %}bg-green-400 
+          {% elif estados[i][j][0] == '0' and estados[i][j][1] == '1' %}bg-red-400 
+          {% else %}bg-amber-400{% endif %} 
                 border p-3 flex flex-col justify-start items-start text-sm text-gray-700 rounded-3xl shadow-2xl hover:shadow-gray-800  hover:shadow-xl
                 hover:scale-110
                 transition-transform duration-300 ease-in-out hover:-rotate-1
                 hover:skew-x-1">
-          <div><span class="font-bold">🌿 Tipo:</span> {{ plantas[i, j].tipo }}</div>
+          <div>
+            <span class="font-bold">🌿 Tipo:</span>
+             {{ plantas[i, j].tipo }}
+             {% if estados[i][j][0] == '0' and estados[i][j].len == 1 %}
+            🟥
+            {% endif %}
+            {% if estados[i][j][0] == '1' %}
+            🟦
+            {% endif %}
+            
+            {% if preds_str[i][j] == 'sano' %}
+            🟩
+            {% if estados[i][j]|length == 2 %}
+            🟥🟦
+            {% endif %}
+            {% else %}
+              {% if estados[i][j]|length == 2 %}
+              ☠️
+              {% else %}
+              🟨
+              {% endif %}
+            {% endif %}
+            </div>
           <!-- CONTENIDO COLAPSABLE -->
           <div class="info-content mt-2 space-y-1">
             <div><span class="text-blue-600 font-medium">💧 Humedad:</span> {{ plantas[i, j]['sensor']['humedad'] }}</div>
@@ -68,7 +90,6 @@
 
 <br>
 <script id="grafs" data-filas="{{plantas.filas}}" data-cols="{{plantas.columnas}}" src="{{ url_for('static', filename='js/grafs_humedad_temp.js') }}"></script>
-
 <script src="{{ url_for('static', filename='js/desplegable_grid_huerto.js') }}"></script>
 
 {% endblock %}

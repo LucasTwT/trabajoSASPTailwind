@@ -1,3 +1,6 @@
+let graficoRiego = null;
+
+
 // Obtenemos los datos del script, no del canvas
 const configScript = document.getElementById('grafs');
 
@@ -43,7 +46,7 @@ function dibujarGrafico() {
   const emaTemp = calcularEMA(temperatura, 4);
   const emaHumedad = calcularEMA(humedad, 4);
 
-  new Chart(ctx, {
+  graficoRiego = new Chart(ctx, {
     type: 'line',
     data: {
       labels: labels,
@@ -92,3 +95,56 @@ function dibujarGrafico() {
 }
 
 cargarDatos();
+
+function isDarkMode() {
+  return document.documentElement.classList.contains('dark');
+}
+
+function actualizarTemaGraficoRiego() {
+  if (!graficoRiego) return;
+
+  const dark = isDarkMode();
+
+  graficoRiego.options.scales.y.ticks = {
+    color: dark ? '#fff' : '#000'
+  };
+
+  graficoRiego.options.scales.y.grid = {
+    color: dark ? '#ffffff20' : '#00000020'
+  };
+
+  graficoRiego.options.scales.x = {
+    ticks: {
+      color: dark ? '#fff' : '#000'
+    },
+    grid: {
+      color: dark ? '#ffffff10' : '#00000010'
+    }
+  };
+
+  graficoRiego.options.plugins = {
+    legend: {
+      labels: {
+        color: dark ? '#fff' : '#000'
+      }
+    },
+    tooltip: {
+      backgroundColor: dark ? '#000000dd' : '#ffffffdd',
+      titleColor: dark ? '#00BCD4' : '#00796B',
+      bodyColor: dark ? '#fff' : '#000',
+      borderColor: dark ? '#ffffff30' : '#00000030'
+    }
+  };
+
+  graficoRiego.update();
+}
+
+
+document.getElementById('modoToggle').addEventListener('click', () => {
+  document.documentElement.classList.contains('dark');
+  localStorage.setItem('theme', isDarkMode() ? 'dark' : 'light');
+  setTimeout(() => { // si lo tienes
+    actualizarTemaGraficoRiego(); // este nuevo
+  }, 300);
+});
+

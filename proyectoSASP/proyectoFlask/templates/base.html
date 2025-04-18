@@ -8,7 +8,7 @@
   >
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='imgs/logoSASPSinFondo.png') }}">
   </head>
-  <body class=" dark:bg-black bg-white">
+  <body class=" dark:bg-[#0E0C0A] bg-[#EEEEFF]">
 
     <nav class="bg-green-800 flex place-content-center w-auto h-auto items-center relative">
       <div class="mx-auto grid w-1/5 h-full">
@@ -17,14 +17,13 @@
         </a>
     </div>
       <div class="hover:bg-green-800 grid w-1/5 h-full text-2xl text-white text-center"><a href="http://127.0.0.1:5000/">Inicio</a></div>
-      <div class="hover:bg-green-800 grid w-1/5 h-full text-2xl text-white text-center"><a>Registro</a></div>
+      <div class="hover:bg-green-800 grid w-1/5 h-full text-2xl text-white text-center"><a href="http://127.0.0.1:5000/registro">Registro</a></div>
       <div class="hover:bg-green-800 grid w-1/5 h-full text-2xl text-white text-center"><a>Inicio de sesión</a></div>
       <div class="hover:bg-green-800 grid w-1/5 h-full text-2xl text-white text-center"><a href="http://127.0.0.1:5000/huerto">Huerto</a></div>
       <button id="modoToggle"
         class="p-2 px-4 rounded-lg transition-all duration-300 font-semibold bg-gradient-to-r from-gray-200 to-gray-400 hover:from-gray-300 hover:to-gray-500
                 dark:from-gray-800 dark:to-gray-600 dark:hover:from-gray-700 dark:hover:to-gray-500
                 text-gray-800 dark:text-white shadow-md mr-6">🌙</button>
-
     </nav>
     
     <main>{% block content %} {% endblock %}</main>

@@ -14,15 +14,31 @@ with open("Data/clima.json", "w") as archivo:
     json.dump(data_clima, archivo)
 
 
-def calcular_riego(humedad, temp, lluvia_1h, esta_lloviendo):
+def calcular_riego(tipo_planta,humedad, temp, lluvia_1h, esta_lloviendo):
     # Parámetros técnicos según FAO para riego agrícola
-    UMBRALES = {
-        'humedad_critica': 25,  # % HR suelos arcillosos
-        'temp_alerta': 30,       # °C para incrementar requerimiento
-        'lluvia_minima': 5       # mm/m² en última hora
-    }
+    plantas_disponibles = [
+        {"tipo": "Tomatos", "requerimientos": {'humedad': 92, 'temperatura': 25}, "clases": 10},
+        {"tipo": "Peppers", "requerimientos": {'humedad': 92, 'temperatura': 25}, "clases": 2},
+        {"tipo": "Potatos", "requerimientos": {'humedad': 75, 'temperatura': 25}, "clases": 3}
+    ]
+
+    # Encontrar la planta
+    planta_actual = None
+    for planta in plantas_disponibles:
+        if planta["tipo"] == tipo_planta:
+            planta_actual = planta
+            break
     
+    if not planta_actual:
+        raise ValueError(f"Planta no reconocida: {tipo_planta}")
+
+    # Umbrales específicos
+    humedad_requerida = planta_actual["requerimientos"]["humedad"]
+    temp_alerta = planta_actual["requerimientos"]["temperatura"]
+    lluvia_minima = 5  # Puedes mover esto a cada planta si es necesario
+
     razones = []
+    problemas = []
     regar = False
     
     # 1. Verificar lluvia actual
@@ -31,27 +47,29 @@ def calcular_riego(humedad, temp, lluvia_1h, esta_lloviendo):
         return False, razones
     
     # 2. Ajustar humedad crítica por temperatura
-    humedad_ajustada = UMBRALES['humedad_critica']
-    if temp > UMBRALES['temp_alerta']:
+    humedad_ajustada = humedad_requerida
+    if temp > temp_alerta:
         humedad_ajustada += 5
         razones.append(f"Temperatura elevada ({temp}°C)")
+        problemas.append("0") # temperatura incorrecta
     
     # 3. Lógica principal de riego
     if humedad < humedad_ajustada:
-        razones.append(f"Humedad del suelo crítica ({humedad}%)")
+        razones.append(f"Humedad del suelo crítica ({humedad}% < {humedad_ajustada}%)")
+        problemas.append("1") # humedad incorrecta
         regar = True
     
     # 4. Considerar lluvia reciente
-    if lluvia_1h >= UMBRALES['lluvia_minima']:
+    if lluvia_1h >= lluvia_minima:
         razones.append(f"Lluvia reciente ({lluvia_1h}mm/m²)")
         regar = False
     
     # 5. Seguridad contra exceso de agua
-    if humedad > 80:
+    if humedad > humedad_requerida + 10:
         razones.append("Suelo sobresaturado")
         regar = False
     
-    return regar, razones
+    return regar, razones, problemas
 
 # Cargar datos
 with open('Data/clima.json', 'r') as f:

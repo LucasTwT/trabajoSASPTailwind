@@ -27,12 +27,16 @@ def gestion_huerto():
     h.plantar()
     preds = h.preds_IA()
     preds_bool = h.pred2bool(preds)
-    riego = h.algoritmo_riego(paht_jsons, h.filas, h.columnas)
+    riego, estados = h.algoritmo_riego(paht_jsons, h.filas, h.columnas, .2)
     data = carga_de_datos(paht_jsons, (h.filas*h.columnas))
     estadisticas = stats(data, preds_bool, num_columnas=h.columnas, num_filas=h.filas)
     distancias = crear_grafo(preds_bool, preds, "static/imgs")
     preds_str = h.pred2string(preds) 
-    return render_template('huerto.html', estadisticas=estadisticas, plantas=h, distancias=distancias, preds_str=preds_str, riego=riego)
+    return render_template('huerto.html', estadisticas=estadisticas, plantas=h, distancias=distancias, preds_str=preds_str, riego=riego, estados=estados)
+
+@app.route('/registro')
+def registro():
+    return render_template("registro.html")
 
 def carga_de_datos(path, num): # Carga de los datos .json
     files = []
