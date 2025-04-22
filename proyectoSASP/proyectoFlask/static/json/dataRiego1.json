@@ -1,12 +1,13 @@
 {
     "riego_requerido": true,
     "parametros": {
-        "humedad_suelo": 87,
-        "temperatura": 16,
+        "humedad_suelo": 71,
+        "temperatura": 31,
         "lluvia_1h": 0
     },
     "razones": [
-        "Humedad del suelo crítica (87% < 92%)"
+        "Temperatura elevada (31°C)",
+        "Humedad del suelo crítica (71% < 80%)"
     ],
     "alerta_meteorologica": false
 }

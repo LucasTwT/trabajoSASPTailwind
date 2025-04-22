@@ -161,7 +161,7 @@ class HuertoVirtual:
     def obtener_datos_sensor_suelo(self):
         return {"humedad": random.randint(70,100), "temperatura": random.randint(15, 35)}
     
-    def algoritmo_riego(self, path, filas, columnas, umbral) -> tuple: # Exporta en formato json los datos de riego
+    def algoritmo_riego(self, path, filas, columnas) -> tuple: # Exporta en formato json los datos de riego
         if len(os.listdir(path)) > 0 and len(os.listdir(path)) != (filas*columnas):
             for dir in os.listdir(path):
                 os.remove(os.path.join(path, dir))
@@ -175,16 +175,6 @@ class HuertoVirtual:
             for j in range(self.columnas):
                 cont+=1
                 datos_sensor = self.huerto[i][j]['sensor']
-                h = datos_sensor['humedad']
-                t = datos_sensor['temperatura']
-                
-                h_recomendada = self.huerto[i][j]['requerimientos']['humedad']
-                
-                h_min = h_recomendada * (1 - umbral)
-                h_max = h_recomendada* (1 + umbral)
-                t_min = 25 * (1 - umbral)
-                t_max = 25 * (1 + umbral)
-                
                 decision, razones, problemas = calcular_riego(self.huerto[i][j]['tipo'],datos_sensor['humedad'], datos_sensor['temperatura'], lluvia_1h , esta_lloviendo)
                 fila_riego_requerido.append((decision, razones))
                 fila_dificultades.append(problemas)

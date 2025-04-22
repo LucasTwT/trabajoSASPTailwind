@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  <title>Registro</title>
+  <title>Iniciar sesión</title>
 {% endblock %}
 
 {% block content %}
   <div class="flex justify-center items-center min-h-screen  px-4">
     <div class="bg-green-100 p-10 rounded-2xl shadow-lg fade-in-up w-full max-w-md transition-shadow duration-300 hover:shadow-2xl">
-      <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Registro de Usuario</h2>
+      <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Iniciar sesión</h2>
 
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -19,13 +19,7 @@
         {% endif %}
       {% endwith %}
 
-      <form method="POST" action="{{ url_for('registro') }}">
-        <div class="mb-4">
-          <label for="nombre" class="block text-gray-800 font-semibold mb-1">Nombre:</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Introduce tu nombre" required
-                 class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400" />
-        </div>
-
+      <form method="POST" action="{{ url_for('login') }}">
         <div class="mb-4">
           <label for="correo" class="block text-gray-800 font-semibold mb-1">Correo electrónico:</label>
           <input type="email" id="correo" name="correo" placeholder="Introduce tu correo" required
@@ -34,30 +28,19 @@
 
         <div class="mb-4">
           <label for="contraseña" class="block text-gray-800 font-semibold mb-1">Contraseña:</label>
-          <input type="password" id="contraseña" name="contraseña" required
-                 placeholder="Introduce tu contraseña"
-                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$"
-                 title="Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial"
+          <input type="password" id="contraseña" name="contraseña" placeholder="Introduce tu contraseña" required
                  class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400" />
-
-          <div id="passwordHelp" class="text-sm text-gray-600 mt-2">
-            <ul class="pl-5 list-disc space-y-1">
-              <li id="length" class="text-red-500">Al menos 8 caracteres</li>
-              <li id="mayus" class="text-red-500">Una letra mayúscula</li>
-              <li id="minus" class="text-red-500">Una letra minúscula</li>
-              <li id="numero" class="text-red-500">Un número</li>
-              <li id="especial" class="text-red-500">Un carácter especial (!@#$%^&*)</li>
-            </ul>
-          </div>
         </div>
 
         <button type="submit"
                 class="w-full bg-green-500 text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition">
-          Registrarse
+          Iniciar sesión
         </button>
       </form>
+
+      <div class="mt-4 text-center text-gray-700">
+        <p>¿No tienes cuenta? <a href="{{ url_for('registro') }}" class="text-green-600 hover:underline">Regístrate aquí</a></p>
+      </div>
     </div>
   </div>
-
-  <script src="{{ url_for('static', filename='js/carrusel.js') }}"></script>
 {% endblock %}
