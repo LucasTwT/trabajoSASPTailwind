@@ -18,13 +18,13 @@ def base_template():
 
 @app.route('/huerto')
 def gestion_huerto():
-    paht_jsons = 'static/json'
+    path_jsons = 'static/json'
     h = HuertoVirtual(7, 7, 'static/plantasImgs')
     h.plantar()
     preds = h.preds_IA()
     preds_bool = h.pred2bool(preds)
-    riego, estados = h.algoritmo_riego(paht_jsons, h.filas, h.columnas)
-    data = carga_de_datos(paht_jsons, (h.filas*h.columnas))
+    riego, estados = h.algoritmo_riego(path_jsons, h.filas, h.columnas)
+    data = carga_de_datos(path_jsons, (h.filas*h.columnas))
     estadisticas = stats(data, preds_bool, num_columnas=h.columnas, num_filas=h.filas)
     distancias = crear_grafo(preds_bool, preds, "static/imgs")
     preds_str = h.pred2string(preds) 
@@ -101,8 +101,6 @@ def stats(files: list, pred_bool: list, num_filas, num_columnas) -> dict: # Mens
         estadisticas['Número_plantas_enfermas'] = f'{num} 😀'
 
     return estadisticas
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

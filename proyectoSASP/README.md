@@ -86,8 +86,14 @@ Detectar cuando hay que regar,
 para ello recibe datos meteorológicos una API y tambíen se simulan los datos recibidos por sensores de humedad y temperatura
 
 ---
+## Arquitectura de la app:
+
+<img src="Arquitectura.svg">
+
+---
 
 ## Implementación en la web:
 
 Todos estos codigos se implementan en la web con la estructura del archivo 
 <img src="ProyectoSASPEstructura.svg">
+
