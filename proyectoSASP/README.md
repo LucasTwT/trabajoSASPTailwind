@@ -1,5 +1,15 @@
 # Proyecto de SASP:
 
+## Integrantes:
+
+- Asier
+- Lucas Jiménez
+- Ariadne
+- Álvaro Suarez
+- Álvaro Prado
+- Alejandro Pache
+
+
 ## Descripción:
 Crear una simulación de un huerto con herramientas avanzadas 
 

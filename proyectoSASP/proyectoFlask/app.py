@@ -19,7 +19,7 @@ def base_template():
 @app.route('/huerto')
 def gestion_huerto():
     path_jsons = 'static/json'
-    h = HuertoVirtual(7, 7, 'static/plantasImgs')
+    h = HuertoVirtual(5, 5, 'static/plantasImgs')
     h.plantar()
     preds = h.preds_IA()
     preds_bool = h.pred2bool(preds)
@@ -99,7 +99,6 @@ def stats(files: list, pred_bool: list, num_filas, num_columnas) -> dict: # Mens
         estadisticas['Número_plantas_enfermas'] = f'{num} 😷'
     else:
         estadisticas['Número_plantas_enfermas'] = f'{num} 😀'
-
     return estadisticas
 
 if __name__ == '__main__':
